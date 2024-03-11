@@ -1,0 +1,41 @@
+def solution(A):
+    # function to calculate digit sum of a number
+    def digit_sum(num):
+        return sum(map(int, str(num)))
+
+    # storing numbers grouped by their digit sums
+    digit_sum_pairs = {}
+    for num in A:
+        s = digit_sum(num)
+        # grouping numbers by their digit sums
+        if s in digit_sum_pairs:
+            digit_sum_pairs[s].append(num)
+        else:
+            digit_sum_pairs[s] = [num]
+
+    max_sum = -1
+    for s in digit_sum_pairs:
+        # check if there are at least two numbers with the same digit sum
+        if len(digit_sum_pairs[s]) >= 2:
+            # find the maximum pair of numbers with the same digit sum
+            max_pair = sorted(digit_sum_pairs[s])[-2:]
+            print("Pair with equal digit sum:", max_pair)
+            max_sum = max(max_sum, sum(max_pair))
+    
+    # check if any pair with equal digit sum was found
+    if max_sum != -1:
+        print("Maximum sum of two numbers with equal digit sum:", max_sum)
+    else:
+        print("No pair found with equal digit sum.")
+    
+    # return the maximum sum if found otherwise return -1
+    return max_sum if max_sum != -1 else -1
+
+A1 = [51, 71, 17, 42]
+print("Output:", solution(A1))
+
+A2 = [42, 33, 60]
+print("Output:", solution(A2))
+
+A3 = [51, 32, 43]
+print("Output:", solution(A3))

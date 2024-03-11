@@ -1,0 +1,33 @@
+def solution(A):
+    # calculate the total number of bricks and boxes
+    total_bricks = sum(A)
+    N = len(A)
+    
+    # total number of bricks needed for each box to have 10 bricks
+    bricks_targeted = 10 * N
+    
+    # uneven distribution for total number of bricks among the boxes
+    if total_bricks % bricks_targeted != 0:
+        return -1
+    
+    # the average number of bricks needed in each box
+    average_bricks = total_bricks // N
+    moves_made = 0
+    
+    for i in range(N):
+        # difference between the current number of bricks in the box and the target
+        difference = A[i] - average_bricks
+        
+        # incase of a difference, adjust the bricks and count the moves needed
+        if difference != 0:
+            moves_made += abs(difference)
+            if i < N - 1:
+                A[i+1] += difference
+            else:
+                A[i-1] += difference
+    
+    return moves_made
+
+print(solution([7, 15, 10, 8]))
+print(solution([11, 10, 8, 12, 8, 10, 11]))
+print(solution([7, 14, 10]))
