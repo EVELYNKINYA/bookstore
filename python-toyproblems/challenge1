@@ -18,7 +18,7 @@ def solution(A):
         # difference between the current number of bricks in the box and the target
         difference = A[i] - average_bricks
         
-        # incase of a difference, adjust the bricks and count the moves needed
+        # incase of a difference, to adjust the bricks and count the moves needed
         if difference != 0:
             moves_made += abs(difference)
             if i < N - 1:
